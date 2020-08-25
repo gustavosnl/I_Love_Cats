@@ -1,4 +1,4 @@
-package com.glima.ilovecats.list
+package com.glima.ilovecats.detail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
