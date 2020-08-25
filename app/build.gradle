@@ -24,14 +24,14 @@ android {
 
         debug {
             minifyEnabled false
-            buildConfigField "String", "SERVER_URL", "\"https://thecatapi.com/v1/\""
+            buildConfigField "String", "SERVER_URL", "\"https://api.thecatapi.com/v1/\""
             buildConfigField "String", "API_KEY", catApiKey
 
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "SERVER_URL", "\"https://thecatapi.com/v1/\""
+            buildConfigField "String", "SERVER_URL", "\"https://api.thecatapi.com/v1/\""
             buildConfigField "String", "API_KEY", catApiKey
 
         }
