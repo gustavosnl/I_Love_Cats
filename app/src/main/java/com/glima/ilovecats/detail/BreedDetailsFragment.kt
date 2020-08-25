@@ -10,9 +10,6 @@ import androidx.navigation.fragment.findNavController
 import com.glima.ilovecats.R
 import com.glima.ilovecats.databinding.FragmentBreedDetailBinding
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
 class BreedDetailsFragment : Fragment() {
 
     override fun onCreateView(
@@ -21,7 +18,7 @@ class BreedDetailsFragment : Fragment() {
         val binding = FragmentBreedDetailBinding.inflate(inflater)
 
         val args = BreedDetailsFragmentArgs.fromBundle(requireArguments())
-        binding.breed = args.breedId
+        binding.breed = args.breed
         return binding.root
     }
 

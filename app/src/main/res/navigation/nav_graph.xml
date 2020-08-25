@@ -27,9 +27,9 @@
             app:destination="@id/BreedsFragment"
             app:enterAnim="@anim/fragment_open_enter"
             app:exitAnim="@anim/fragment_fade_exit" />
-
         <argument
-            android:name="breedId"
-            app:argType="string" />
+            android:name="Breed"
+            app:argType="com.glima.ilovecats.BreedVO" />
+
     </fragment>
 </navigation>

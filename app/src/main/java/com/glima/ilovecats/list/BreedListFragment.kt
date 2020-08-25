@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.glima.domain.business.model.Breed
+import com.glima.ilovecats.asViewObject
 import com.glima.ilovecats.databinding.FragmentBreedsListBinding
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -24,12 +25,11 @@ class BreedListFragment : Fragment() {
         val binding = FragmentBreedsListBinding.inflate(inflater)
         val adapter = BreedsAdapter { breed: Breed? ->
             findNavController().navigate(
-                BreedListFragmentDirections.actionBreedsFragmentToBreedDetailFragment(breed!!.id)
+                BreedListFragmentDirections.actionBreedsFragmentToBreedDetailFragment(breed!!.asViewObject())
             )
         }
 
         binding.breedsList.adapter = adapter
-
 
 
         lifecycleScope.launch {
