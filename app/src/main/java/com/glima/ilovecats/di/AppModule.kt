@@ -1,5 +1,6 @@
 package com.glima.ilovecats.di
 
+import com.glima.data.repository.CatApi
 import com.glima.ilovecats.BuildConfig
 import com.glima.ilovecats.BuildConfig.DEBUG
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -39,11 +40,15 @@ object AppModule {
                 .addInterceptor(interceptor)
                 .addInterceptor { chain: Interceptor.Chain ->
                     val request = chain.request().newBuilder()
-                        .header("x-api-key", BuildConfig.API_KEY )
+                        .header("x-api-key", BuildConfig.API_KEY)
                         .build()
                     chain.proceed(request)
                 }
                 .build()
+        }
+
+        single<CatApi> {
+            (get() as Retrofit).create(CatApi::class.java)
         }
     }
 }
