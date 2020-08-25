@@ -36,6 +36,15 @@ android {
 
         }
     }
+
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
+
+    androidExtensions {
+        experimental = true
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -79,6 +88,10 @@ dependencies {
     implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+
+
+    //PAGING
+    implementation "androidx.paging:paging-runtime:$paging_version"
 
 
     testImplementation 'junit:junit:4.13'

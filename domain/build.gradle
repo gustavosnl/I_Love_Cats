@@ -11,6 +11,10 @@ dependencies {
     //COROUTINES
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
 
+    //PAGING
+    implementation "androidx.paging:paging-common-ktx:$paging_version"
+
+
 }
 
 sourceCompatibility = "1.8"
