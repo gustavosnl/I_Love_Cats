@@ -16,7 +16,7 @@ import org.koin.android.ext.android.inject
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class FirstFragment : Fragment() {
+class BreedListFragment : Fragment() {
 
     val usecase: FetchBreedsUseCase by inject()
     override fun onCreateView(
