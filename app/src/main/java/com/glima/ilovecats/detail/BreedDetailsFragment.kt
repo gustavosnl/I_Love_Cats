@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.glima.ilovecats.R
 import com.glima.ilovecats.databinding.FragmentBreedDetailBinding
 import org.koin.android.viewmodel.compat.ViewModelCompat.viewModel
 import org.koin.core.parameter.parametersOf
@@ -29,7 +31,10 @@ class BreedDetailsFragment : Fragment() {
             viewLifecycleOwner, Observer {
                 Glide.with(requireContext())
                     .load(it.url)
-                    .into(binding.catImageView)
+                    .apply(
+                        RequestOptions()
+                            .error(R.drawable.ic_img_error_placeholder)
+                    ).into(binding.catImageView)
             }
         )
         binding.loadRandomImageButton.setOnClickListener {

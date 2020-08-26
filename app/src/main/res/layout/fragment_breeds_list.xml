@@ -3,15 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <FrameLayout
+    <!--    <FrameLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        tools:context=".list.BreedListFragment">-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/breedsList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".list.BreedListFragment">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/breedsList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-    </FrameLayout>
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_breed" />
+    <!--    </FrameLayout>-->
 </layout>

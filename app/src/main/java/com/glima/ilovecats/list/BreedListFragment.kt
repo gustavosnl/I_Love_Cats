@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.glima.domain.business.model.Breed
 import com.glima.ilovecats.asViewObject
 import com.glima.ilovecats.databinding.FragmentBreedsListBinding
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.compat.ViewModelCompat.viewModel
 
@@ -21,25 +21,26 @@ class BreedListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-
         val binding = FragmentBreedsListBinding.inflate(inflater)
+        binding.lifecycleOwner = this
+
         val adapter = BreedsAdapter { breed: Breed? ->
             findNavController().navigate(
                 BreedListFragmentDirections.actionBreedsFragmentToBreedDetailFragment(breed!!.asViewObject())
             )
+        }
+        lifecycleScope.launch {
+            breedListViewModel.getBreeds()
         }
 
         binding.breedsList.adapter = adapter.withLoadStateFooter(
             BreedLoadStateAdapter(adapter::retry)
         )
 
+        breedListViewModel.breeds.observe(viewLifecycleOwner, Observer { pagingData ->
+            adapter.submitData(lifecycle, pagingData)
+        })
 
-        lifecycleScope.launch {
-            val breeds = breedListViewModel.getBreeds()
-            breeds.collectLatest {
-                adapter.submitData(it)
-            }
-        }
         return binding.root
     }
 }
