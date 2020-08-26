@@ -1,32 +1,42 @@
 package com.glima.ilovecats.detail
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.navigation.fragment.findNavController
-import com.glima.ilovecats.R
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
+import com.glima.ilovecats.databinding.FragmentBreedDetailBinding
+import org.koin.android.viewmodel.compat.ViewModelCompat.viewModel
+import org.koin.core.parameter.parametersOf
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
 class BreedDetailsFragment : Fragment() {
 
-    override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_second, container, false)
+    private val breedDetailViewModel by viewModel(this, BreedDetailViewModel::class.java) {
+        parametersOf(
+            BreedDetailsFragmentArgs.fromBundle(requireArguments())
+        )
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
+        val binding = FragmentBreedDetailBinding.inflate(inflater)
+        breedDetailViewModel.loadImage()
 
-        view.findViewById<Button>(R.id.button_second).setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+        breedDetailViewModel.image.observe(
+            viewLifecycleOwner, Observer {
+                Glide.with(requireContext())
+                    .load(it.url)
+                    .into(binding.catImageView)
+            }
+        )
+        binding.loadRandomImageButton.setOnClickListener {
+            breedDetailViewModel.loadImage()
         }
+
+        binding.viewModel = breedDetailViewModel
+        return binding.root
     }
 }

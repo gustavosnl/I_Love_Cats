@@ -1,20 +1,14 @@
-package com.glima.data.domain
+package com.glima.ilovecats
 
 import com.glima.domain.business.model.Breed
-import com.glima.domain.business.model.BreedImage
 
-fun BreedResponse.asDomain() = Breed(
+fun Breed.asViewObject() = BreedVO(
     id = id,
     name = name,
     description = description,
     lifeSpan = lifeSpan,
     origin = origin,
-    isRare = isRare == 1,
+    isRare = isRare,
     affectionLevel = affectionLevel,
     intelligence = intelligence
-)
-
-fun BreedImageResponse.asDomain() = BreedImage(
-    id = id,
-    url = url
 )

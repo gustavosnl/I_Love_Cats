@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cd_cat_image">An image of a cat.</string>
+    <string name="cd_rare_icon">An Star icon indicates this cat breed is rare</string>
+</resources>
