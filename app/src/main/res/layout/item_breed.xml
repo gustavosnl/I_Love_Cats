@@ -1,13 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
 
+    <data>
 
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/breedName"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textSize="30sp"
-    tools:text="Gatinho viralata"
+        <import type="android.view.View" />
 
-    />
+        <variable
+            name="breed"
+            type="com.glima.domain.business.model.Breed" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/breedName"
+            style="@style/BreedListItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{breed.name}"
+            android:textSize="30sp"
+            tools:text="Gatinho viralata" />
+
+        <ImageView
+            android:layout_width="@dimen/icon_default_size"
+            android:layout_height="@dimen/icon_default_size"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_rare_breeding"
+            android:visibility="@{breed.rare ? View.VISIBLE : View.GONE}" />
+    </LinearLayout>
+</layout>
 

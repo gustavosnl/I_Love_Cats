@@ -27,7 +27,8 @@ class BreedsAdapter(val onclick: (Breed?) -> Unit) :
 
         fun bind(breed: Breed?) {
             binding.root.setOnClickListener(this)
-            binding.breedName.text = breed?.name
+            binding.breed = breed
+            binding.executePendingBindings()
         }
 
         override fun onClick(p0: View?) {
