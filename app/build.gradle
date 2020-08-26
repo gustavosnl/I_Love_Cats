@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'androidx.navigation.safeargs'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 30
@@ -93,6 +94,11 @@ dependencies {
 
     //PAGING
     implementation "androidx.paging:paging-runtime:$paging_version"
+
+
+    //IMAGE LOADING
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+
 
 
     testImplementation 'junit:junit:4.13'
