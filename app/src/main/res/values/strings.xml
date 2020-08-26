@@ -1,15 +1,15 @@
 <resources>
     <string name="app_name">I love Cats</string>
     <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
 
-    <string name="random_image">Next Image</string>
+    <string name="first_fragment_label">Breeds List</string>
+    <string name="second_fragment_label">Breed Detail</string>
+
+    <string name="random_image">Random Image</string>
     <string name="average_lifespan">Life Span:\n %s years</string>
     <string name="affection_level">Affection\nlevel: %d</string>
     <string name="intelligence_level">Intelligence\nlevel: %d</string>
-    <string name="rare_breed">Rare Breed!</string>
+    <string name="rare_breed">Rare Breed!! </string>
 
 
 </resources>
