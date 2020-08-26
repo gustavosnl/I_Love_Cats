@@ -29,7 +29,9 @@ class BreedListFragment : Fragment() {
             )
         }
 
-        binding.breedsList.adapter = adapter
+        binding.breedsList.adapter = adapter.withLoadStateFooter(
+            BreedLoadStateAdapter(adapter::retry)
+        )
 
 
         lifecycleScope.launch {
