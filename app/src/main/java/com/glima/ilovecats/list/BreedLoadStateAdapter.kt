@@ -28,6 +28,7 @@ class BreedLoadStateAdapter(val retry: () -> Unit) : LoadStateAdapter<LoadStateV
             binding.let {
                 it.progressBar.isVisible = loadState is LoadState.Loading
                 it.textView.isVisible = loadState is LoadState.Error
+                it.imageView.isVisible = loadState is LoadState.Error
 
                 it.button.let { button ->
                     button.isVisible = loadState is LoadState.Error
