@@ -23,18 +23,19 @@
 
             <TextView
                 android:id="@+id/breedName"
+                style="@style/DetailTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:text="@{viewModel.breedVO.name}"
-                android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/catImageView"
                 tools:text="Australian Mist" />
 
             <TextView
                 android:id="@+id/description"
+                style="@style/BreedInfo.BreedDescription"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -46,7 +47,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/breedName"
                 app:layout_constraintTop_toBottomOf="@+id/lifeSpan"
-                tools:text="@tools:sample/lorem" />
+                tools:text="@tools:sample/lorem/random" />
 
             <Button
                 android:id="@+id/loadRandomImageButton"
@@ -54,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="16dp"
+                android:backgroundTint="@color/accent"
                 android:text="@string/random_image"
                 app:layout_constraintBottom_toBottomOf="@+id/catImageView"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -108,6 +110,7 @@
                 app:layout_constraintTop_toTopOf="@+id/catAffection" />
 
             <TextView
+                style="@style/BreedInfo"
                 android:id="@+id/lifeSpan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -119,6 +122,7 @@
                 tools:text="@string/average_lifespan" />
 
             <TextView
+                style="@style/BreedInfo"
                 android:id="@+id/affection"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -130,6 +134,7 @@
                 tools:text="@string/affection_level" />
 
             <TextView
+                style="@style/BreedInfo"
                 android:id="@+id/intelligence"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -141,15 +146,12 @@
                 tools:text="@string/intelligence_level" />
 
             <TextView
+                style="@style/RareBreedBadge"
                 android:id="@+id/rareBreedBadge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:background="@drawable/rare_breed_bg"
-                android:drawablePadding="8dp"
                 android:gravity="center_vertical"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
                 android:text="@string/rare_breed"
                 android:textSize="18sp"
                 android:visibility="@{viewModel.breedVO.rare ? View.VISIBLE : View.GONE}"
