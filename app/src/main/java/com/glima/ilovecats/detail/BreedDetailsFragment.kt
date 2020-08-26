@@ -4,29 +4,39 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.glima.ilovecats.R
+import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
 import com.glima.ilovecats.databinding.FragmentBreedDetailBinding
+import org.koin.android.viewmodel.compat.ViewModelCompat.viewModel
+import org.koin.core.parameter.parametersOf
 
 class BreedDetailsFragment : Fragment() {
+
+    private val breedDetailViewModel by viewModel(this, BreedDetailViewModel::class.java) {
+        parametersOf(
+            BreedDetailsFragmentArgs.fromBundle(requireArguments())
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentBreedDetailBinding.inflate(inflater)
+        breedDetailViewModel.loadImage()
 
-        val args = BreedDetailsFragmentArgs.fromBundle(requireArguments())
-        binding.breed = args.breed
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        view.findViewById<Button>(R.id.button_second).setOnClickListener {
-            findNavController().navigate(R.id.action_BreedDetailFragment_to_BreedsFragment)
+        breedDetailViewModel.image.observe(
+            viewLifecycleOwner, Observer {
+                Glide.with(requireContext())
+                    .load(it.url)
+                    .into(binding.catImageView)
+            }
+        )
+        binding.loadRandomImageButton.setOnClickListener {
+            breedDetailViewModel.loadImage()
         }
+
+        binding.viewModel = breedDetailViewModel
+        return binding.root
     }
 }

@@ -10,15 +10,15 @@ import kotlinx.coroutines.launch
 
 class BreedDetailViewModel(
     private val loadRandomImageUseCase: LoadRandomImageForBreedingUseCase,
-    val args: BreedDetailsFragmentArgs
+    private val args: BreedDetailsFragmentArgs
 ) : ViewModel() {
 
     val image = MutableLiveData<BreedImage>()
-
+    val breedVO = args.breed
 
     fun loadImage() {
         viewModelScope.launch {
-            val result = loadRandomImageUseCase.execute(args.breed.id)
+            val result = loadRandomImageUseCase.execute(breedVO.id)
             result.collectLatest {
                 image.value = it
             }

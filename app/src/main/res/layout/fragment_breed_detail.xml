@@ -4,33 +4,161 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="android.view.View" />
+
         <variable
-            name="breed"
-            type="com.glima.ilovecats.BreedVO" />
+            name="viewModel"
+            type="com.glima.ilovecats.detail.BreedDetailViewModel" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".detail.BreedDetailsFragment">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textview_second"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@id/button_second"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="@{breed.description}"/>
+            tools:context=".detail.BreedDetailsFragment">
 
-        <Button
-            android:id="@+id/button_second"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/previous"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textview_second" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/breedName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:text="@{viewModel.breedVO.name}"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/catImageView"
+                tools:text="Australian Mist" />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="40dp"
+                android:text="@{viewModel.breedVO.description}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/breedName"
+                app:layout_constraintTop_toBottomOf="@+id/lifeSpan"
+                tools:text="@tools:sample/lorem" />
+
+            <Button
+                android:id="@+id/loadRandomImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/random_image"
+                app:layout_constraintBottom_toBottomOf="@+id/catImageView"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <ImageView
+                android:id="@+id/catImageView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:contentDescription="@string/cd_cat_image"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="w,1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
+
+
+            <ImageView
+                android:id="@+id/catAffection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_kitty_affectiveness"
+                app:layout_constraintEnd_toStartOf="@+id/imgIntelligence"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/imgLifespan"
+                app:layout_constraintTop_toTopOf="@+id/imgLifespan" />
+
+            <ImageView
+                android:id="@+id/imgLifespan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_kitty_lifespan"
+                app:layout_constraintEnd_toStartOf="@+id/catAffection"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/breedName" />
+
+            <ImageView
+                android:id="@+id/imgIntelligence"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_kitty_intelligence"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/catAffection"
+                app:layout_constraintTop_toTopOf="@+id/catAffection" />
+
+            <TextView
+                android:id="@+id/lifeSpan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{@string/average_lifespan(viewModel.breedVO.lifeSpan)}"
+                app:layout_constraintEnd_toEndOf="@+id/imgLifespan"
+                app:layout_constraintStart_toStartOf="@+id/imgLifespan"
+                app:layout_constraintTop_toBottomOf="@+id/imgLifespan"
+                tools:text="@string/average_lifespan" />
+
+            <TextView
+                android:id="@+id/affection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{@string/affection_level(viewModel.breedVO.affectionLevel)}"
+                app:layout_constraintEnd_toEndOf="@+id/catAffection"
+                app:layout_constraintStart_toStartOf="@+id/catAffection"
+                app:layout_constraintTop_toBottomOf="@+id/catAffection"
+                tools:text="@string/affection_level" />
+
+            <TextView
+                android:id="@+id/intelligence"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{@string/intelligence_level(viewModel.breedVO.intelligence)}"
+                app:layout_constraintEnd_toEndOf="@+id/imgIntelligence"
+                app:layout_constraintStart_toStartOf="@+id/imgIntelligence"
+                app:layout_constraintTop_toBottomOf="@+id/imgIntelligence"
+                tools:text="@string/intelligence_level" />
+
+            <TextView
+                android:id="@+id/rareBreedBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/rare_breed_bg"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text="@string/rare_breed"
+                android:textSize="18sp"
+                android:visibility="@{viewModel.breedVO.rare ? View.VISIBLE : View.GONE}"
+                app:drawableEndCompat="@drawable/ic_rare_breeding"
+                app:layout_constraintBottom_toBottomOf="@+id/breedName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/breedName" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>
