@@ -5,13 +5,13 @@ apply plugin: 'androidx.navigation.safeargs'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 28
     buildToolsVersion "30.0.1"
 
     defaultConfig {
         applicationId "com.glima.ilovecats"
         minSdkVersion 22
-        targetSdkVersion 30
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
 
@@ -53,6 +53,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    testOptions.unitTests {
+        includeAndroidResources = true
     }
 }
 
@@ -100,9 +103,17 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$glide_version"
 
 
+    testImplementation "androidx.test.ext:junit-ktx:$androidx_test_junit_version"
+    testImplementation "androidx.test:core-ktx:$androidx_test_core_version"
+    testImplementation "org.robolectric:robolectric:$roboletric_vesion"
+    testImplementation "org.koin:koin-test:$koin_version"
+    testImplementation "io.mockk:mockk:$mockk_version"
+    testImplementation "androidx.arch.core:core-testing:$arch_testing_version"
 
     testImplementation 'junit:junit:4.13'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+
+    androidTestImplementation "io.mockk:mockk-android:$mockk_version"
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
 }
