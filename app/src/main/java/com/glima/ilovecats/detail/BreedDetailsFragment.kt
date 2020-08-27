@@ -15,14 +15,16 @@ import org.koin.core.parameter.parametersOf
 
 class BreedDetailsFragment : Fragment() {
 
+    private val arguments by lazy { BreedDetailsFragmentArgs.fromBundle(requireArguments()) }
     private val breedDetailViewModel by viewModel(this, BreedDetailViewModel::class.java) {
-        parametersOf(BreedDetailsFragmentArgs.fromBundle(requireArguments()))
+        parametersOf(arguments.breed)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentBreedDetailBinding.inflate(inflater)
+        breedDetailViewModel
         breedDetailViewModel.loadImage()
 
         breedDetailViewModel.image.observe(
