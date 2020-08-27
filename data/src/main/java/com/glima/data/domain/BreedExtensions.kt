@@ -8,7 +8,6 @@ fun BreedResponse.asDomain() = Breed(
     name = name,
     description = description,
     lifeSpan = lifeSpan,
-    origin = origin,
     isRare = isRare == 1,
     affectionLevel = affectionLevel,
     intelligence = intelligence
