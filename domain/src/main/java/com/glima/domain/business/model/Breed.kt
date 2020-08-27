@@ -5,7 +5,6 @@ data class Breed(
     val name: String,
     val description: String,
     val lifeSpan: String,
-    val origin: String,
     val isRare: Boolean,
     val affectionLevel: Int,
     val intelligence: Int
