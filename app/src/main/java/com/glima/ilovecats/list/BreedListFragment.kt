@@ -8,8 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.glima.domain.business.model.Breed
-import com.glima.ilovecats.asViewObject
+import com.glima.ilovecats.BreedVO
 import com.glima.ilovecats.databinding.FragmentBreedsListBinding
 import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.compat.ViewModelCompat.viewModel
@@ -24,11 +23,12 @@ class BreedListFragment : Fragment() {
         val binding = FragmentBreedsListBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
-        val adapter = BreedsAdapter { breed: Breed? ->
+        val adapter = BreedsAdapter { breed: BreedVO? ->
             findNavController().navigate(
-                BreedListFragmentDirections.actionBreedsFragmentToBreedDetailFragment(breed!!.asViewObject())
+                BreedListFragmentDirections.actionBreedsFragmentToBreedDetailFragment(breed!!)
             )
         }
+
         lifecycleScope.launch {
             breedListViewModel.getBreeds()
         }

@@ -16,9 +16,7 @@ import org.koin.core.parameter.parametersOf
 class BreedDetailsFragment : Fragment() {
 
     private val breedDetailViewModel by viewModel(this, BreedDetailViewModel::class.java) {
-        parametersOf(
-            BreedDetailsFragmentArgs.fromBundle(requireArguments())
-        )
+        parametersOf(BreedDetailsFragmentArgs.fromBundle(requireArguments()))
     }
 
     override fun onCreateView(

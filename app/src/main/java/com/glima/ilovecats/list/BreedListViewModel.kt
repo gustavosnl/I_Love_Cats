@@ -6,22 +6,30 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.glima.domain.business.model.Breed
+import androidx.paging.map
 import com.glima.domain.business.usecase.FetchBreedsUseCase
+import com.glima.ilovecats.BreedVO
+import com.glima.ilovecats.asViewObject
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class BreedListViewModel(private val listBreedsUseCase: FetchBreedsUseCase) : ViewModel() {
 
-    private val _breeds = MutableLiveData<PagingData<Breed>>()
+    private val _breeds = MutableLiveData<PagingData<BreedVO>>()
 
-    val breeds: LiveData<PagingData<Breed>>
+    val breeds: LiveData<PagingData<BreedVO>>
         get() = _breeds
 
     suspend fun getBreeds() {
         viewModelScope.launch {
             listBreedsUseCase.execute(0)
-                .cachedIn(viewModelScope).collectLatest {
+                .map { pagingData ->
+                    pagingData.map {
+                        it.asViewObject()
+                    }
+                }.cachedIn(viewModelScope)
+                .collectLatest {
                     _breeds.value = it
                 }
         }

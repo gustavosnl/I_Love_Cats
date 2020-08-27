@@ -7,7 +7,7 @@
 
         <variable
             name="breed"
-            type="com.glima.domain.business.model.Breed" />
+            type="com.glima.ilovecats.BreedVO" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -22,7 +22,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{breed.name}"
-            android:textSize="30sp"
             tools:text="Gatinho viralata" />
 
         <ImageView
