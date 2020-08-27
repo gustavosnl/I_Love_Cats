@@ -7,7 +7,6 @@ fun Breed.asViewObject() = BreedVO(
     name = name,
     description = description,
     lifeSpan = lifeSpan,
-    origin = origin,
     isRare = isRare,
     affectionLevel = affectionLevel,
     intelligence = intelligence

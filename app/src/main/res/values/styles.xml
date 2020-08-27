@@ -47,5 +47,11 @@
         <item name="drawableEndCompat">@drawable/ic_rare_breeding</item>
     </style>
 
+    <style name="BreedListItem">
+        <item name="android:textSize">@dimen/list_item_breed_name_text_size</item>
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="fontFamily">@font/signika_negative_semibold</item>
+        <item name="android:padding">@dimen/default_list_item_padding</item>
+    </style>
 
 </resources>
