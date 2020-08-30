@@ -1,6 +1,8 @@
 package com.glima.ilovecats.detail
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.asFlow
+import androidx.lifecycle.liveData
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.glima.domain.business.model.BreedImage
 import com.glima.domain.business.usecase.LoadRandomImageForBreedingUseCase
@@ -10,7 +12,12 @@ import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
 import junit.framework.Assert.assertEquals
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.setMain
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -21,11 +28,14 @@ class BreedDetailViewModelTest {
 
     @get:Rule
     var rule = InstantTaskExecutorRule()
+    private val testDispatcher = TestCoroutineDispatcher()
+
 
     @MockK
     lateinit var useCase: LoadRandomImageForBreedingUseCase
 
     lateinit var viewModel: BreedDetailViewModel
+
 
     private val breeVO = BreedVO(
         id = "abys",
@@ -45,6 +55,8 @@ class BreedDetailViewModelTest {
     @Before
     fun setupTestEnvironment() {
         MockKAnnotations.init(this)
+        Dispatchers.setMain(testDispatcher)
+
 
         viewModel = BreedDetailViewModel(
             loadRandomImageUseCase = useCase,
@@ -52,15 +64,19 @@ class BreedDetailViewModelTest {
         )
     }
 
-    @Test
-    fun loadImage_loadsNewRandomBreedImage() {
+    @After
+    fun tearDown() {
+        Dispatchers.resetMain()
+        testDispatcher.cleanupTestCoroutines()
+    }
 
-        coEvery { useCase.execute(breeVO.id) } returns flow { breedImage }
+    @Test
+    fun loadImage_loadsNewRandomBreedImage() = testDispatcher.runBlockingTest {
+        coEvery { useCase.execute(breeVO.id) } returns liveData { emit(breedImage) }.asFlow()
 //        when
         viewModel.loadImage()
 //        then
         val value = viewModel.image.getOrAwaitValue()
         assertEquals(value, breedImage)
-
     }
 }

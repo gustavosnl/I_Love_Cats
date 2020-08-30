@@ -15,7 +15,6 @@ class ILoveCatsApplication : Application() {
         super.onCreate()
 
         startKoin {
-            androidLogger()
             androidContext(this@ILoveCatsApplication)
             modules(
                 listOf(
