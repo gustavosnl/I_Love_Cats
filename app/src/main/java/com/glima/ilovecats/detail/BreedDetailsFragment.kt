@@ -15,6 +15,7 @@ import org.koin.core.parameter.parametersOf
 
 class BreedDetailsFragment : Fragment() {
 
+    lateinit var binding: FragmentBreedDetailBinding
     private val arguments by lazy { BreedDetailsFragmentArgs.fromBundle(requireArguments()) }
     private val breedDetailViewModel by viewModel(this, BreedDetailViewModel::class.java) {
         parametersOf(arguments.breed)
@@ -23,24 +24,31 @@ class BreedDetailsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentBreedDetailBinding.inflate(inflater)
+        binding = FragmentBreedDetailBinding.inflate(inflater)
+
+        observeCatImage()
+        setupRandomImageClick()
+
+        binding.viewModel = breedDetailViewModel
         breedDetailViewModel.loadImage()
 
+        return binding.root
+    }
+
+    private fun observeCatImage() {
         breedDetailViewModel.image.observe(
             viewLifecycleOwner, Observer {
                 Glide.with(requireContext())
                     .load(it.url)
-                    .apply(
-                        RequestOptions()
-                            .error(R.drawable.ic_img_error_placeholder)
-                    ).into(binding.catImageView)
+                    .apply(RequestOptions().error(R.drawable.ic_img_error_placeholder))
+                    .into(binding.catImageView)
             }
         )
+    }
+
+    private fun setupRandomImageClick() {
         binding.loadRandomImageButton.setOnClickListener {
             breedDetailViewModel.loadImage()
         }
-
-        binding.viewModel = breedDetailViewModel
-        return binding.root
     }
 }
