@@ -24,7 +24,6 @@ class BreedDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentBreedDetailBinding.inflate(inflater)
-        breedDetailViewModel
         breedDetailViewModel.loadImage()
 
         breedDetailViewModel.image.observe(
