@@ -6,11 +6,9 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.glima.domain.business.model.Breed
 import com.glima.ilovecats.BreedVO
 import com.glima.ilovecats.databinding.ItemBreedBinding
 import com.glima.ilovecats.list.BreedsAdapter.BreedViewHolder
-
 
 class BreedsAdapter(val onclick: (BreedVO?) -> Unit) :
     PagingDataAdapter<BreedVO, BreedViewHolder>(BreedDiffUtil()) {
@@ -36,7 +34,6 @@ class BreedsAdapter(val onclick: (BreedVO?) -> Unit) :
             onclick.invoke(getItem(bindingAdapterPosition))
         }
     }
-
 }
 
 class BreedDiffUtil : DiffUtil.ItemCallback<BreedVO>() {
@@ -47,5 +44,4 @@ class BreedDiffUtil : DiffUtil.ItemCallback<BreedVO>() {
     override fun areContentsTheSame(oldItem: BreedVO, newItem: BreedVO): Boolean {
         return oldItem == newItem
     }
-
 }

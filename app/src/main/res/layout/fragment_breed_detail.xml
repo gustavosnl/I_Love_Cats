@@ -120,8 +120,8 @@
                 app:layout_constraintTop_toTopOf="@+id/catAffection" />
 
             <TextView
-                style="@style/BreedInfo"
                 android:id="@+id/lifeSpan"
+                style="@style/BreedInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -132,8 +132,8 @@
                 tools:text="@string/average_lifespan" />
 
             <TextView
-                style="@style/BreedInfo"
                 android:id="@+id/affection"
+                style="@style/BreedInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -144,8 +144,8 @@
                 tools:text="@string/affection_level" />
 
             <TextView
-                style="@style/BreedInfo"
                 android:id="@+id/intelligence"
+                style="@style/BreedInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -156,8 +156,8 @@
                 tools:text="@string/intelligence_level" />
 
             <TextView
-                style="@style/RareBreedBadge"
                 android:id="@+id/rareBreedBadge"
+                style="@style/RareBreedBadge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
