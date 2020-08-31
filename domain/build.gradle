@@ -1,0 +1,21 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //DI
+    implementation "org.koin:koin-core:$koin_version"
+
+    //COROUTINES
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
+
+    //PAGING
+    implementation "androidx.paging:paging-common-ktx:$paging_version"
+
+
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"

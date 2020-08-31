@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/BreedsFragment">
+
+    <fragment
+        android:id="@+id/BreedsFragment"
+        android:name="com.glima.ilovecats.list.BreedListFragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_breeds_list">
+
+        <action
+            android:id="@+id/action_BreedsFragment_to_BreedDetailFragment"
+            app:destination="@id/BreedDetailFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/BreedDetailFragment"
+        android:name="com.glima.ilovecats.detail.BreedDetailsFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_breed_detail">
+
+        <argument
+            android:name="Breed"
+            app:argType="com.glima.ilovecats.BreedVO" />
+
+    </fragment>
+</navigation>

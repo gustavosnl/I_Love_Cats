@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">I love Cats</string>
+
+    <string name="first_fragment_label">Breeds List</string>
+    <string name="second_fragment_label">Breed Detail</string>
+
+    <string name="random_image">Random Image</string>
+    <string name="average_lifespan">Life Span:\n %s years</string>
+    <string name="affection_level">Affection\nlevel: %d</string>
+    <string name="intelligence_level">Intelligence\nlevel: %d</string>
+    <string name="rare_breed">Rare Breed!! </string>
+    <string name="button_label_retry">Try Again</string>
+    <string name="error_message">Oops! something went wrong :(</string>
+
+
+</resources>
