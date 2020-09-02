@@ -1,7 +1,6 @@
 package com.glima.ilovecats.list
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -10,7 +9,7 @@ import com.glima.ilovecats.BreedVO
 import com.glima.ilovecats.databinding.ItemBreedBinding
 import com.glima.ilovecats.list.BreedsAdapter.BreedViewHolder
 
-class BreedsAdapter(val onclick: (BreedVO?) -> Unit) :
+class BreedsAdapter(val onclick: (BreedVO) -> Unit) :
     PagingDataAdapter<BreedVO, BreedViewHolder>(BreedDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BreedViewHolder {
@@ -22,16 +21,14 @@ class BreedsAdapter(val onclick: (BreedVO?) -> Unit) :
     }
 
     inner class BreedViewHolder(private val binding: ItemBreedBinding) :
-        RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(breed: BreedVO?) {
-            binding.root.setOnClickListener(this)
-            binding.breed = breed
-            binding.executePendingBindings()
-        }
-
-        override fun onClick(p0: View?) {
-            onclick.invoke(getItem(bindingAdapterPosition))
+        fun bind(breedVO: BreedVO?) {
+            breedVO?.let { breed ->
+                binding.root.setOnClickListener { onclick.invoke(breed) }
+                binding.breed = breed
+                binding.executePendingBindings()
+            }
         }
     }
 }

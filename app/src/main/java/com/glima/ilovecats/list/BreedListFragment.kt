@@ -32,7 +32,7 @@ class BreedListFragment : Fragment() {
     }
 
     private fun setupBreedsAdapter() {
-        adapter = BreedsAdapter { breed: BreedVO? ->
+        adapter = BreedsAdapter { breed: BreedVO ->
             navigateToDetailsScreen(breed)
         }
         binding.breedsList.adapter = adapter.withLoadStateFooter(
@@ -52,9 +52,9 @@ class BreedListFragment : Fragment() {
         })
     }
 
-    private fun navigateToDetailsScreen(breed: BreedVO?) {
+    private fun navigateToDetailsScreen(breed: BreedVO) {
         findNavController().navigate(
-            BreedListFragmentDirections.actionBreedsFragmentToBreedDetailFragment(breed!!)
+            BreedListFragmentDirections.actionBreedsFragmentToBreedDetailFragment(breed)
         )
     }
 }
