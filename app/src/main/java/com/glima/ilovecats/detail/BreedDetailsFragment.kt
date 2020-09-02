@@ -30,7 +30,6 @@ class BreedDetailsFragment : Fragment() {
         setupRandomImageClick()
 
         binding.viewModel = breedDetailViewModel
-        breedDetailViewModel.loadImage()
 
         return binding.root
     }

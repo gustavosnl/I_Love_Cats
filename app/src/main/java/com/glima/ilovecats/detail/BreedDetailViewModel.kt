@@ -20,6 +20,9 @@ class BreedDetailViewModel(
     val image: LiveData<BreedImage>
         get() = _image
 
+    init {
+        loadImage()
+    }
 
     fun loadImage() {
         viewModelScope.launch(Dispatchers.Main) {
