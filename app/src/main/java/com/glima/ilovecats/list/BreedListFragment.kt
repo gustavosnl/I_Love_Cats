@@ -6,11 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.glima.ilovecats.BreedVO
 import com.glima.ilovecats.databinding.FragmentBreedsListBinding
-import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.compat.ViewModelCompat.viewModel
 
 class BreedListFragment : Fragment() {
@@ -25,7 +23,6 @@ class BreedListFragment : Fragment() {
         binding = FragmentBreedsListBinding.inflate(inflater)
 
         setupBreedsAdapter()
-        loadBreeds()
         observeBreedsFromViewModel()
 
         return binding.root
@@ -38,12 +35,6 @@ class BreedListFragment : Fragment() {
         binding.breedsList.adapter = adapter.withLoadStateFooter(
             BreedLoadStateAdapter(adapter::retry)
         )
-    }
-
-    private fun loadBreeds() {
-        lifecycleScope.launch {
-            breedListViewModel.getBreeds()
-        }
     }
 
     private fun observeBreedsFromViewModel() {
