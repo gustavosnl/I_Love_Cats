@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.glima.domain.business.model.BreedImage
 import com.glima.domain.business.usecase.LoadRandomImageForBreedingUseCase
 import com.glima.ilovecats.BreedVO
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -21,6 +20,9 @@ class BreedDetailViewModel(
     val image: LiveData<BreedImage>
         get() = _image
 
+    init {
+        loadImage()
+    }
 
     fun loadImage() {
         viewModelScope.launch(Dispatchers.Main) {

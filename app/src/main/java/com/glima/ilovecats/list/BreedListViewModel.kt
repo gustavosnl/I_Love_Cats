@@ -21,7 +21,11 @@ class BreedListViewModel(private val listBreedsUseCase: FetchBreedsUseCase) : Vi
     val breeds: LiveData<PagingData<BreedVO>>
         get() = _breeds
 
-    suspend fun getBreeds() {
+    init {
+        getBreeds()
+    }
+
+    fun getBreeds() {
         viewModelScope.launch {
             listBreedsUseCase.execute(0)
                 .map { pagingData ->
