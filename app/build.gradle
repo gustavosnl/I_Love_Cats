@@ -59,13 +59,8 @@ android {
 
 private Object retrieveApiKey() {
     def apiKey = System.env.CAT_API_KEY
-    if (apiKey == null) {
-        def keyFile = file("keys.properties")
-        def keysProperties = new Properties()
-        keysProperties.load(new FileInputStream(keyFile))
-        apiKey = keysProperties['CAT_API_KEY']
-    }
-    apiKey
+    if (apiKey != null) return apiKey
+    else throw new InvalidUserDataException("You must have to define CAT_API_KEY as environment variable.")
 }
 
 dependencies {
