@@ -19,23 +19,19 @@ android {
     }
 
     buildTypes {
-        def keyFile = file("keys.properties")
-        def keysProperties = new Properties()
-        keysProperties.load(new FileInputStream(keyFile))
-        def catApiKey = keysProperties['CAT_API_KEY']
+        def apiKey = retrieveApiKey()
 
         debug {
             minifyEnabled false
             buildConfigField "String", "SERVER_URL", "\"https://api.thecatapi.com/v1/\""
-            buildConfigField "String", "API_KEY", catApiKey
+            buildConfigField "String", "API_KEY", "\"$apiKey\""
 
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField "String", "SERVER_URL", "\"https://api.thecatapi.com/v1/\""
-            buildConfigField "String", "API_KEY", catApiKey
-
+            buildConfigField "String", "API_KEY", "\"$apiKey\""
         }
     }
 
@@ -60,6 +56,13 @@ android {
     useLibrary 'android.test.runner'
 
 }
+
+private Object retrieveApiKey() {
+    def apiKey = System.env.CAT_API_KEY
+    if (apiKey != null) return apiKey
+    else throw new InvalidUserDataException("You must have to define CAT_API_KEY as environment variable.")
+}
+
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
@@ -69,7 +72,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.1'
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.2.0'
+    implementation 'com.google.android.material:material:1.2.1'
     implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
 
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_extensions_version"
